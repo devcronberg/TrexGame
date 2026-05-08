@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,8 +6,9 @@
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
-    <!-- .NET 10 removed 'dotnet <global-tool>' syntax; call mgcb directly from PATH -->
-    <_Command>mgcb</_Command>
+    <!-- .NET 10 removed 'dotnet <global-tool>' syntax; use full path to mgcb (cross-platform) -->
+    <_Command Condition="'$(OS)' == 'Windows_NT'">$(USERPROFILE)\.dotnet\tools\mgcb</_Command>
+    <_Command Condition="'$(OS)' != 'Windows_NT'">$(HOME)/.dotnet/tools/mgcb</_Command>
   </PropertyGroup>
 
   <PropertyGroup>
